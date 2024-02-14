@@ -41,7 +41,7 @@ public class K8sController {
             // old number of replicas
             int oldReplicas = spec.getReplicas();
             spec.setReplicas(request.replicas);
-            api.replaceNamespacedDeployment(deploymentName, namespace, deployment);
+            api.replaceNamespacedDeployment(deploymentName, namespace, deployment).execute();
             return ResponseEntity.ok("Deployment " + deploymentName + " scaled successfully from " + oldReplicas + " to " +  request.replicas + " replicas in namespace " + namespace);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to scale deployment " + deploymentName);

@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("org.springframework.boot") version "3.2.2"  // this will help create the MANIFEST to run jar
 }
 
 group = "lip17"

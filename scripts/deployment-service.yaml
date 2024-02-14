@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-scale-deployment
+  namespace: test-scale-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-scale-service
+  template:
+    metadata:
+      labels:
+        app: test-scale-service
+    spec:
+      serviceAccountName: test-scale-sa # secret of this service account will be mounted to the pod
+      containers:
+        - name: service
+          image: lip17/k8s-java-example:3.0
+          ports:
+            - containerPort: 8000
+            - containerPort: 5005 # for remote debugging purpose
